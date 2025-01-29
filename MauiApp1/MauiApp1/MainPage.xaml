@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.MainPage"
+             Shell.NavBarIsVisible="False">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="30,0"
+                             Spacing="25">
+            <Label Text="SMSReader"
+                   Style="{StaticResource Headline}"
+                   SemanticProperties.HeadingLevel="Level1" />
+
+            <Label
+                Text="First try to get permissions for sms reading. Than write tg bot token. Than try to get chat_id it appears only after some communicating with your own chat bot. Try execute /start command for example.WARN! Do not close the app for work." />
+
+            <Button x:Name="PermissionBtn"
+                    Text="Check SMS permissions"
+                    SemanticProperties.Hint="Check permissions for SMS reading"
+                    Clicked="OnCounterClicked"
+                    HorizontalOptions="Fill" />
+
+            <Editor BackgroundColor="{StaticResource PrimaryDark}"
+                    Placeholder="Type your tg bot token"
+                    MinimumHeightRequest="70"
+                    TextChanged="Editor_OnTextChanged" x:Name="Editor" />
+
+            <Button x:Name="ChatIdBtn"
+                    Text="Get chat id for sending"
+                    SemanticProperties.Hint="Get chat id for routing sms to the tg chat"
+                    Clicked="ChatIdBtn_OnClicked"
+                    HorizontalOptions="Fill" />
+
+            <Label x:Name="UpdatesLabel" Text="Not ready. Please check chat id."></Label>
+
+            <!-- region Filters -->
+
+            <VerticalStackLayout BackgroundColor="{StaticResource Secondary}" Spacing="20">
+                <Label Text="You can write filters using ';' divider" />
+
+                <Grid>
+                    <Entry x:Name="SenderFilterEntry"
+                           ClearButtonVisibility="WhileEditing"
+                           BackgroundColor="LightGreen"
+                           Placeholder="Sender should contain"
+                           PlaceholderColor="Brown"
+                           TextChanged="SenderFilterEntry_OnTextChanged" />
+                </Grid>
+                
+                <Grid>
+                    <Entry x:Name="MessageFilterEntry"
+                           ClearButtonVisibility="WhileEditing"
+                           BackgroundColor="LightCoral"
+                           Placeholder="Message should contain"
+                           PlaceholderColor="Brown"
+                           TextChanged="MessageFilterEntry_OnTextChanged" />
+                </Grid>
+            </VerticalStackLayout>
+
+            <!-- endregion Filters -->
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
