@@ -45,13 +45,20 @@ public static class TgHelper
 
     public static async Task<string> CheckChatIdAsync()
     {
-        var url = $"https://api.telegram.org/bot{GetTgBotToken()}/getUpdates";
+        try
+        {
+            var url = $"https://api.telegram.org/bot{GetTgBotToken()}/getUpdates";
 
-        using var client = new HttpClient();
-        var response = await client.GetStringAsync(url);
-        var json = JObject.Parse(response);
+            using var client = new HttpClient();
+            var response = await client.GetStringAsync(url);
+            var json = JObject.Parse(response);
 
-        return json["result"]?[0]?["message"]?["chat"]?["id"]?.ToString();
+            return json["result"]?[0]?["message"]?["chat"]?["id"]?.ToString();
+        }
+        catch (Exception e)
+        {
+            return string.Empty;
+        }
     }
 
     public static void SetTgBotToken(string tgBotToken)
